@@ -14,17 +14,13 @@ app.get('/api/check', (req, res) => {
   const word = req.query.kelime;
 
   if (!word) {
-    return res.status(400).json({ error: 'Kelime parametresi eksik!' });
+    return res.status(400).json(false); 
   }
 
   const dictionary = getDictionaryData();
   const isValidWord = dictionary.includes(word.toLowerCase());
 
-  if (isValidWord) {
-    res.json({ message: `${word} geçerli bir kelimedir.` });
-  } else {
-    res.json({ message: `${word} geçerli bir kelime değildir.` });
-  }
+  res.json(isValidWord);
 });
 
 app.listen(port, () => {
