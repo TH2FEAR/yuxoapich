@@ -3,7 +3,7 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const dictionaryPath = 'dictionary.txt';  
+const dictionaryPath = './public/dictionary.txt';  
 function getDictionaryData() {
   const data = fs.readFileSync(dictionaryPath, 'utf-8');
   return data.split('\n').map(word => word.trim().toLowerCase());
