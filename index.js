@@ -1,27 +1,23 @@
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 const app = express();
-const port = process.env.PORT || 3000;
 
-const dictionaryPath = './public/dictionary.txt';  
+const dictionaryPath = path.join(__dirname, 'dictionary.txt');
+
 function getDictionaryData() {
   const data = fs.readFileSync(dictionaryPath, 'utf-8');
-  return data.split('\n').map(word => word.trim().toLowerCase());
+  return data.split('\n').map(k => k.trim().toLowerCase()).filter(Boolean);
 }
 
 app.get('/api/check', (req, res) => {
   const word = req.query.kelime;
-
-  if (!word) {
-    return res.status(400).json({ error: 'Kelime parametresi eksik!' });
-  }
+  if (!word) return res.status(400).send('kelime yok amk');
 
   const dictionary = getDictionaryData();
-  const isValidWord = dictionary.includes(word.toLowerCase());
+  const isValid = dictionary.includes(word.toLowerCase());
 
-  res.json({ valid: isValidWord });  
+  res.send(isValid.toString()); // sadece true ya da false
 });
 
-app.listen(port, () => {
-  console.log(`Sunucu ${port} portunda çalışıyor...`);
-});
+module.exports = app;
