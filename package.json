@@ -1,5 +1,5 @@
 {
-  "name": "kelime-turetme-api",
+  "name": "kelime-api",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
