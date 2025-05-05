@@ -3,10 +3,9 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const dictionaryPath = './dictionary.txt';  
+const dictionaryPath = 'dictionary.txt';  
 function getDictionaryData() {
   const data = fs.readFileSync(dictionaryPath, 'utf-8');
-  // Satırları ayırıyoruz, boşlukları temizliyoruz ve kelimeleri bir diziye çeviriyoruz
   return data.split('\n').map(word => word.trim().toLowerCase());
 }
 
