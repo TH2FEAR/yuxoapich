@@ -14,13 +14,13 @@ app.get('/api/check', (req, res) => {
   const word = req.query.kelime;
 
   if (!word) {
-    return res.status(400).json(false); 
+    return res.status(400).json({ error: 'kelime parametresi eksik' });
   }
 
   const dictionary = getDictionaryData();
   const isValidWord = dictionary.includes(word.toLowerCase());
 
-  res.json(isValidWord);
+  res.json({ valid: isValidWord });
 });
 
 app.listen(port, () => {
